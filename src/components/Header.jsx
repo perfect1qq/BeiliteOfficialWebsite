@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import logo from '../assets/logo.png'
 
 /* ------------------------------------------------------------------ */
 /*  导航菜单配置 — 严格对标 bltvip.com 原站结构                          */
@@ -83,7 +84,7 @@ export default function Header() {
           {/* Logo 区 */}
           <div className="brand-logo">
             <Link to="/">
-              <img src="/src/assets/logo.png" alt={t('nav_home')} className="logo-img" />
+              <img src={logo} alt={t('nav_home')} className="logo-img" />
             </Link>
           </div>
 
