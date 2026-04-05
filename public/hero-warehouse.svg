@@ -1,0 +1,57 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="g1" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+<stop stop-color="#07111D"/>
+<stop offset="0.45" stop-color="#123D6B"/>
+<stop offset="1" stop-color="#F58A1F"/>
+</linearGradient>
+<linearGradient id="rack" x1="0" y1="0" x2="0" y2="1">
+<stop stop-color="#1E7DB5"/>
+<stop offset="1" stop-color="#0B5FA6"/>
+</linearGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+<stop stop-color="#FFB14D"/>
+<stop offset="1" stop-color="#F58A1F"/>
+</linearGradient>
+</defs>
+<rect width="1600" height="1000" fill="url(#g1)"/>
+<rect x="0" y="820" width="1600" height="180" fill="#07111D"/>
+<g opacity="0.16">
+<circle cx="1360" cy="180" r="220" fill="#FFFFFF"/>
+</g>
+<g transform="translate(120,130)">
+<rect x="0" y="0" width="1200" height="640" rx="36" fill="#0F1E31" fill-opacity="0.5" stroke="#FFFFFF" stroke-opacity="0.12"/>
+<g transform="translate(70,80)">
+<rect x="0" y="0" width="34" height="470" fill="url(#rack)"/>
+<rect x="220" y="0" width="34" height="470" fill="url(#rack)"/>
+<rect x="440" y="0" width="34" height="470" fill="url(#rack)"/>
+<rect x="660" y="0" width="34" height="470" fill="url(#rack)"/>
+<rect x="880" y="0" width="34" height="470" fill="url(#rack)"/>
+<rect x="1100" y="0" width="34" height="470" fill="url(#rack)"/>
+<rect x="-10" y="120" width="1160" height="26" fill="url(#beam)"/>
+<rect x="-10" y="240" width="1160" height="26" fill="url(#beam)"/>
+<rect x="-10" y="360" width="1160" height="26" fill="url(#beam)"/>
+<g opacity="0.88">
+<rect x="36" y="36" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="254" y="36" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="472" y="36" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="690" y="36" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="908" y="36" width="150" height="70" rx="8" fill="#D8E0EA"/>
+
+<rect x="36" y="156" width="150" height="70" rx="8" fill="#F5D6B1"/>
+<rect x="254" y="156" width="150" height="70" rx="8" fill="#F5D6B1"/>
+<rect x="472" y="156" width="150" height="70" rx="8" fill="#F5D6B1"/>
+<rect x="690" y="156" width="150" height="70" rx="8" fill="#F5D6B1"/>
+<rect x="908" y="156" width="150" height="70" rx="8" fill="#F5D6B1"/>
+
+<rect x="36" y="276" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="254" y="276" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="472" y="276" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="690" y="276" width="150" height="70" rx="8" fill="#D8E0EA"/>
+<rect x="908" y="276" width="150" height="70" rx="8" fill="#D8E0EA"/>
+</g>
+</g>
+</g>
+<text x="110" y="900" fill="white" fill-opacity="0.92" font-size="48" font-family="Arial, Helvetica, sans-serif" font-weight="700">BEILITE SHELVES</text>
+<text x="110" y="954" fill="white" fill-opacity="0.62" font-size="22" font-family="Arial, Helvetica, sans-serif">Warehouse racking planning · manufacturing · installation</text>
+</svg>
