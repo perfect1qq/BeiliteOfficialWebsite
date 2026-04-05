@@ -18,16 +18,16 @@ export default function Brochure() {
       <Helmet>
         <title>{t('nav_brochure')}_倍力特物流装备有限公司</title>
       </Helmet>
-      
-      <ul className="book" style={{ display: 'flex', gap: '50px' }}>
+
+      <ul className="book">
         {brochureData.map((item, idx) => (
-          <li key={idx} style={{ listStyle: 'none', width: '262px' }}>
-            <a href="#" style={{ display: 'block' }}>
+          <li key={idx}>
+            <a href="#" className="book-link">
               <div className="bookImg">
                  <img src={item.image} alt={t(item.nameKey)} loading="lazy" decoding="async" />
                  <i></i>
               </div>
-              <div className="bookTit" style={{ textAlign: 'center' }}>{t(item.nameKey)}</div>
+              <div className="bookTit">{t(item.nameKey)}</div>
             </a>
           </li>
         ))}

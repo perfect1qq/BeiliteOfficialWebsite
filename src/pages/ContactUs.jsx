@@ -41,7 +41,7 @@ export default function ContactUs() {
       {/* 公司联系信息 */}
       <div className="conTop">
         <div className="conName">WUHAN BEILITE LOGISTICS EQUIPMENT CO., LTD.</div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className="contact-top-inner">
           <div className="conLef">
             <p className="odd">{t('con_address_label')}{t('con_address_val')}</p>
             <p>{t('con_mobile_label')}{t('con_mobile_val')}</p>

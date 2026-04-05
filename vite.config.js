@@ -1,22 +1,20 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import vueDevTools from 'vite-plugin-vue-devtools'
+import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-
-  plugins: [vue()],
-  // 💡 添加下面这一行！
-  // 格式是 '/仓库名字/'，记得前  后都有斜杠
-  // 如果你刚才在 GitHub 建的仓库叫 my-vue-app，这里就写 '/my-vue-app/'
-  base: '/Beilit-Price-List/',
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
-  },
+  plugins: [react()],
+  
+  /**
+   * 静态资源基础路径
+   * GitHub Pages 部署在：https://<user>.github.io/BeiliteOfficialWebsite/
+   * 因此需要设置为仓库名，确保资源加载正确。
+   */
+  base: '/BeiliteOfficialWebsite/',
+  
+  server: {
+    host: '0.0.0.0',
+    port: 5174,
+    strictPort: true
+  }
 })
-

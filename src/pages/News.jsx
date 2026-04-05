@@ -43,21 +43,21 @@ export default function News() {
       <Helmet>
         <title>{t('nav_news')}_倍力特货架</title>
       </Helmet>
-      
-      <ul className="arList" style={{ padding: 0 }}>
+
+      <ul className="arList">
         {currentNews.map((news, idx) => (
-          <li key={idx} style={{ listStyle: 'none', display: 'flex', gap: '30px', borderBottom: '1px solid #eee', padding: '30px 0' }}>
-            <div className="arImg" style={{ width: '280px', height: '180px', flexShrink: 0, position: 'relative' }}>
-              <img src={news.image} alt={t(news.titleKey)} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '4px' }} />
+          <li key={idx}>
+            <div className="arImg">
+              <img src={news.image} alt={t(news.titleKey)} />
               {news.isVideo && (
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(0,0,0,0.5)', width: '50px', height: '50px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '24px' }}>▶</div>
+                <div className="video-badge">▶</div>
               )}
             </div>
-            <div className="arText" style={{ flex: 1 }}>
-              <h3 style={{ fontSize: '20px', color: '#333', marginBottom: '10px' }}>{t(news.titleKey)}</h3>
-              <div style={{ color: '#999', fontSize: '13px', marginBottom: '15px' }}>{t('date_prefix')} {news.date}</div>
-              <p style={{ color: '#777', fontSize: '14px', lineHeight: '1.6', height: '68px', overflow: 'hidden' }}>{t(news.descKey)}</p>
-              <Link to="#" style={{ color: 'var(--blue)', fontWeight: 'bold', fontSize: '14px', marginTop: '10px', display: 'inline-block' }}>{t('btn_detail')} ▸</Link>
+            <div className="arText">
+              <h3 className="news-page-title">{t(news.titleKey)}</h3>
+              <div className="news-page-date">{t('date_prefix')} {news.date}</div>
+              <p className="news-page-desc">{t(news.descKey)}</p>
+              <Link to="#" className="news-page-link">{t('btn_detail')} ▸</Link>
             </div>
           </li>
         ))}

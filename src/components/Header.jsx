@@ -1,7 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import logo from '../assets/logo.png'
 
 /* ------------------------------------------------------------------ */
 /*  导航菜单配置 — 严格对标 bltvip.com 原站结构                          */
@@ -60,12 +59,13 @@ const MEGA_MENU = {
 /* ------------------------------------------------------------------ */
 
 /**
- * 全站顶部导航栏 — 1:1 还原 bltvip.com
+ * 全站顶部导航栏
  */
 export default function Header() {
   const { t, i18n } = useTranslation()
   const { pathname } = useLocation()
   const [activeKey, setActiveKey] = useState(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   /** 切换中英文 */
   const toggleLang = useCallback(() => {
@@ -77,15 +77,58 @@ export default function Header() {
   const isActive = (path) =>
     path === '/' ? pathname === '/' : pathname.startsWith(path)
 
+  /** 路由变化时自动收起移动端菜单 */
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
+
+  const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
+
   return (
     <header className="site-header">
       <div className="header-container">
         <div className="header-inner">
-          {/* Logo 区 */}
-          <div className="brand-logo">
-            <Link to="/">
-              <img src={logo} alt={t('nav_home')} className="logo-img" />
-            </Link>
+          <div className="header-mobile-top">
+            {/* Logo 区 */}
+            <div className="brand-logo">
+              <Link to="/">
+                <img
+                  src={logoSrc}
+                  alt={t('nav_home')}
+                  className="logo-img"
+                  onError={(e) => {
+                    e.currentTarget.src = `${import.meta.env.BASE_URL}favicon.svg`
+                  }}
+                />
+              </Link>
+            </div>
+
+            <div className="header-mobile-actions">
+              {/* 右侧电话 + 语言切换 */}
+              <div className="header-right">
+                <div className="tel">
+                  <span className="tel-icon">☎</span>
+                  <span className="tel-nums">
+                    027-69340899<br />15171431996
+                  </span>
+                </div>
+                <button className="lang-btn" onClick={toggleLang} type="button">
+                  {i18n.language === 'zh' ? 'EN' : '中'}
+                </button>
+              </div>
+
+              <button
+                type="button"
+                className="mobile-menu-btn"
+                onClick={() => setMobileMenuOpen((v) => !v)}
+                aria-label="打开导航菜单"
+                aria-expanded={mobileMenuOpen}
+              >
+                <span />
+                <span />
+                <span />
+              </button>
+            </div>
           </div>
 
           {/* 主导航 */}
@@ -99,14 +142,25 @@ export default function Header() {
                   onMouseEnter={() => setActiveKey(key)}
                   onMouseLeave={() => setActiveKey(null)}
                 >
-                  <Link to={path} className="nLi-title">{t(key)}</Link>
+                  <Link
+                    to={path}
+                    className="nLi-title"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t(key)}
+                  </Link>
 
                   {/* MegaMenu 白色大面板下拉 */}
                   {hasMega && mega && activeKey === key && (
                     <div className="subboxbg">
                       <div className="mega-left">
                         {mega.links.map((link) => (
-                          <Link key={link.path} to={link.path} className="mega-link">
+                          <Link
+                            key={link.path}
+                            to={link.path}
+                            className="mega-link"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
                             {t(link.nameKey)}
                             <span className="mega-arrow">›</span>
                           </Link>
@@ -125,18 +179,39 @@ export default function Header() {
             })}
           </nav>
 
-          {/* 右侧电话 + 语言切换 */}
-          <div className="header-right">
-            <div className="tel">
-              <span className="tel-icon">☎</span>
-              <span className="tel-nums">
-                027-69340899<br />15171431996
-              </span>
+          {/* 移动端菜单面板 */}
+          {mobileMenuOpen && (
+            <div className="mobile-nav-panel">
+              {NAV_ITEMS.map(({ key, path, hasMega }) => {
+                const mega = MEGA_MENU[key]
+                return (
+                  <div key={key} className="mobile-nav-group">
+                    <Link
+                      to={path}
+                      className={`mobile-nav-item ${isActive(path) ? 'active' : ''}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {t(key)}
+                    </Link>
+                    {hasMega && mega && (
+                      <div className="mobile-nav-sub">
+                        {mega.links.map((link) => (
+                          <Link
+                            key={link.path}
+                            to={link.path}
+                            className="mobile-nav-sub-item"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {t(link.nameKey)}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
-            <button className="lang-btn" onClick={toggleLang} type="button">
-              {i18n.language === 'zh' ? 'EN' : '中'}
-            </button>
-          </div>
+          )}
         </div>
       </div>
     </header>
