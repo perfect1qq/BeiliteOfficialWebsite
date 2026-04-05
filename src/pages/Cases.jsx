@@ -29,15 +29,13 @@ export default function Cases() {
         <title>{t('nav_cases')}_倍力特货架</title>
       </Helmet>
       
-      <ul className="caseList" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '30px' }}>
+      <ul className="caseList">
         {currentCases.map((item, idx) => (
-          <li key={idx} style={{ listStyle: 'none' }}>
-            <div className="caseItem" style={{ border: '1px solid #eee', paddingBottom: '15px' }}>
-              <div className="caseImg" style={{ width: '100%', height: '240px', overflow: 'hidden' }}>
-                 <img src={item.image} alt={t(item.nameKey)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
-              </div>
-              <div className="caseTit" style={{ textAlign: 'center', marginTop: '15px', fontWeight: 'bold' }}>{t(item.nameKey)}</div>
+          <li key={idx} className="caseItem">
+            <div className="caseImg">
+              <img src={item.image} alt={t(item.nameKey)} loading="lazy" decoding="async" />
             </div>
+            <div className="caseTit">{t(item.nameKey)}</div>
           </li>
         ))}
       </ul>

@@ -1672,3 +1672,441 @@ ul {
     width: 100%;
   }
 }
+
+
+
+/* =========================
+   Responsive overrides
+   ========================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+}
+
+.container,
+.header-container {
+  width: min(var(--page-max), calc(100% - 2 * var(--page-pad)));
+}
+
+.header-inner {
+  position: relative;
+}
+
+.header-mobile-top {
+  gap: 12px;
+}
+
+.brand-logo {
+  flex: 0 0 auto;
+}
+
+.brand-logo a {
+  max-width: 52vw;
+}
+
+.logo-img {
+  width: auto;
+  height: clamp(36px, 4vw, 54px);
+  max-width: 100%;
+}
+
+.header-mobile-actions {
+  margin-left: auto;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.header-right {
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.desktop-nav {
+  flex-wrap: wrap;
+  row-gap: 2px;
+}
+
+.nLi {
+  flex: 0 0 auto;
+}
+
+.nLi-title {
+  padding: 0 clamp(10px, 1.2vw, 18px);
+}
+
+.box1Bg > .container,
+.mainBg,
+.contact-top-inner,
+.about-gallery,
+.footer-top {
+  min-width: 0;
+}
+
+.box1Bg > .container {
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+}
+
+.mainBg {
+  grid-template-columns: minmax(220px, 240px) minmax(0, 1fr);
+}
+
+.box2Item,
+.box3Item,
+.box4List,
+.caseList,
+.book {
+  min-width: 0;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.box2Item {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.box3Item {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.box4List {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.caseList {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.book {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 262px));
+}
+
+.caseItem {
+  height: 100%;
+}
+
+.caseImg {
+  aspect-ratio: 4 / 3;
+  height: auto;
+}
+
+.caseImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.proImg img,
+.box2Img img,
+.box4Img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.box1Rig {
+  min-width: 0;
+}
+
+.helpInner {
+  flex-wrap: wrap;
+}
+
+.helpText {
+  flex: 1 1 340px;
+  width: auto;
+  min-width: 0;
+}
+
+.helpLinks {
+  flex: 1 1 320px;
+  justify-content: flex-end;
+}
+
+.page-image,
+.oneText img,
+.about-gallery img {
+  max-width: 100%;
+  height: auto;
+}
+
+.subpage-wrapper,
+.home-page-wrapper {
+  overflow-x: clip;
+}
+
+.caseItem,
+.box2Item > li,
+.box4List li,
+.proItem,
+.newsCard {
+  min-width: 0;
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .box1Bg > .container,
+  .mainBg,
+  .contact-top-inner,
+  .about-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .mainBg {
+    margin-top: 32px;
+  }
+
+  .left {
+    order: 2;
+  }
+
+  .right {
+    order: 1;
+  }
+
+  .helpInner {
+    align-items: flex-start;
+  }
+
+  .helpLinks {
+    justify-content: flex-start;
+  }
+}
+
+/* Small tablet / large phone */
+@media (max-width: 992px) {
+  .header-mobile-top {
+    min-height: 76px;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .desktop-nav.mobile-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-top: 1px solid #eee;
+    background: #fff;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+
+  .header-right {
+    gap: 10px;
+  }
+
+  .tel-nums {
+    font-size: 12px;
+  }
+
+  .box1Rig {
+    padding: 28px;
+  }
+
+  .boxTith2,
+  .boxTitH2,
+  .helpText h2 {
+    font-size: clamp(24px, 4.6vw, 30px);
+  }
+
+  .subpage-banner {
+    height: 220px;
+  }
+
+  .breadNav {
+    margin-top: -40px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --page-pad: 12px;
+  }
+
+  .container,
+  .header-container {
+    width: calc(100% - 24px);
+  }
+
+  .header-mobile-top {
+    min-height: 68px;
+  }
+
+  .brand-logo a {
+    max-width: 58vw;
+  }
+
+  .logo-img {
+    height: 42px;
+  }
+
+  .header-right {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .box1Bg,
+  .box2Bg,
+  .box3Bg,
+  .box4Bg {
+    padding: 48px 0;
+  }
+
+  .boxTith2,
+  .boxTitH2 {
+    font-size: 24px;
+    margin-bottom: 28px;
+  }
+
+  .boxTitEn {
+    display: block;
+    margin-left: 0;
+    margin-top: 6px;
+    font-size: 13px;
+  }
+
+  .box1Rig {
+    padding: 22px;
+  }
+
+  .statNum {
+    font-size: 30px;
+  }
+
+  .box2Item,
+  .box3Item,
+  .box4List,
+  .caseList,
+  .book,
+  .about-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .caseImg {
+    aspect-ratio: 16 / 10;
+  }
+
+  .box2Img img,
+  .box4Img img {
+    height: 210px;
+  }
+
+  .helpInner {
+    gap: 18px;
+  }
+
+  .helpText h2 {
+    font-size: 24px;
+  }
+
+  .helpText p {
+    font-size: 14px;
+  }
+
+  .helpLinks {
+    gap: 14px;
+  }
+
+  .helpItem {
+    min-width: 92px;
+  }
+
+  .subpage-banner {
+    height: 180px;
+  }
+
+  .breadNav {
+    height: auto;
+    line-height: 1.6;
+    padding: 12px 14px;
+  }
+
+  .comNameCn {
+    font-size: 22px;
+  }
+
+  .comNameEn {
+    font-size: 16px;
+  }
+
+  .conTop,
+  .message-section,
+  .book,
+  .contact-top-inner {
+    padding: 18px 14px;
+  }
+
+  .floating-trigger {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    bottom: 18px;
+    left: 12px;
+    border-radius: 999px;
+    padding: 10px 14px;
+  }
+
+  .floating-panel {
+    left: 12px;
+    right: 12px;
+    bottom: 18px;
+    width: auto;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-mobile-top {
+    min-height: 64px;
+  }
+
+  .logo-img {
+    height: 38px;
+  }
+
+  .mobile-menu-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .nLi-title {
+    font-size: 15px;
+    min-height: 48px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .box4Text {
+    padding: 14px 12px;
+  }
+
+  .newsTitle {
+    font-size: 16px;
+  }
+
+  .newsDesc {
+    font-size: 13px;
+  }
+
+  .footer-top,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-phone {
+    font-size: 20px;
+  }
+}

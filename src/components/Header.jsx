@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import logoPng from '../assets/logo.png'
 import { useTranslation } from 'react-i18next'
 
 /* ------------------------------------------------------------------ */
@@ -82,8 +83,6 @@ export default function Header() {
     setMobileMenuOpen(false)
   }, [pathname])
 
-  const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
-
   return (
     <header className="site-header">
       <div className="header-container">
@@ -93,11 +92,11 @@ export default function Header() {
             <div className="brand-logo">
               <Link to="/">
                 <img
-                  src={logoSrc}
+                  src={logoPng}
                   alt={t('nav_home')}
                   className="logo-img"
                   onError={(e) => {
-                    e.currentTarget.src = `${import.meta.env.BASE_URL}favicon.svg`
+                    e.currentTarget.src = `${import.meta.env.BASE_URL}assets/favicon.svg`
                   }}
                 />
               </Link>
