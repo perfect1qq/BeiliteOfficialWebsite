@@ -1,0 +1,28 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+<stop stop-color="#10253C"/>
+<stop offset="1" stop-color="#1E7DB5"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="800" rx="48" fill="url(#bg)"/>
+<g opacity="0.18">
+<circle cx="980" cy="180" r="180" fill="#F58A1F"/>
+</g>
+<g transform="translate(140,120)">
+<rect x="0" y="0" width="70" height="440" rx="8" fill="#DCE6F2"/>
+<rect x="180" y="0" width="70" height="440" rx="8" fill="#DCE6F2"/>
+<rect x="360" y="0" width="70" height="440" rx="8" fill="#DCE6F2"/>
+<rect x="0" y="110" width="430" height="22" fill="#F58A1F"/>
+<rect x="0" y="250" width="430" height="22" fill="#F58A1F"/>
+<g fill="#0C1728">
+<rect x="25" y="22" width="110" height="64" rx="8"/>
+<rect x="205" y="22" width="110" height="64" rx="8"/>
+<rect x="25" y="162" width="110" height="64" rx="8" fill="#F0C18A"/>
+<rect x="205" y="162" width="110" height="64" rx="8" fill="#F0C18A"/>
+<rect x="25" y="302" width="110" height="64" rx="8"/>
+<rect x="205" y="302" width="110" height="64" rx="8"/>
+</g>
+</g>
+<text x="110" y="720" fill="white" fill-opacity="0.8" font-size="34" font-family="Arial, Helvetica, sans-serif">Product Preview</text>
+</svg>

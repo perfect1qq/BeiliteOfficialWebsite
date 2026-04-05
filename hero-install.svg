@@ -1,0 +1,41 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+<stop stop-color="#08111D"/>
+<stop offset="1" stop-color="#203B63"/>
+</linearGradient>
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/>
+<rect x="0" y="810" width="1600" height="190" fill="#07111D"/>
+<g opacity="0.18">
+<rect x="1050" y="90" width="360" height="360" rx="180" fill="#FFB14D"/>
+</g>
+<g transform="translate(110,120)">
+<rect x="0" y="0" width="1380" height="650" rx="36" fill="#0F1E31" fill-opacity="0.52" stroke="#FFFFFF" stroke-opacity="0.12"/>
+<g transform="translate(100,70)">
+<rect x="0" y="0" width="70" height="520" rx="8" fill="#1E7DB5"/>
+<rect x="250" y="0" width="70" height="520" rx="8" fill="#1E7DB5"/>
+<rect x="500" y="0" width="70" height="520" rx="8" fill="#1E7DB5"/>
+<rect x="750" y="0" width="70" height="520" rx="8" fill="#1E7DB5"/>
+<rect x="1000" y="0" width="70" height="520" rx="8" fill="#1E7DB5"/>
+<rect x="0" y="120" width="1070" height="26" fill="#F58A1F"/>
+<rect x="0" y="245" width="1070" height="26" fill="#F58A1F"/>
+<rect x="0" y="370" width="1070" height="26" fill="#F58A1F"/>
+<g fill="#D8E0EA">
+<rect x="95" y="24" width="130" height="82" rx="8"/>
+<rect x="345" y="24" width="130" height="82" rx="8"/>
+<rect x="595" y="24" width="130" height="82" rx="8"/>
+<rect x="845" y="24" width="130" height="82" rx="8"/>
+<rect x="95" y="149" width="130" height="82" rx="8" fill="#F3CFA0"/>
+<rect x="345" y="149" width="130" height="82" rx="8" fill="#F3CFA0"/>
+<rect x="595" y="149" width="130" height="82" rx="8" fill="#F3CFA0"/>
+<rect x="845" y="149" width="130" height="82" rx="8" fill="#F3CFA0"/>
+<rect x="95" y="274" width="130" height="82" rx="8"/>
+<rect x="345" y="274" width="130" height="82" rx="8"/>
+<rect x="595" y="274" width="130" height="82" rx="8"/>
+<rect x="845" y="274" width="130" height="82" rx="8"/>
+</g>
+</g>
+</g>
+<text x="120" y="900" fill="white" fill-opacity="0.9" font-size="42" font-family="Arial, Helvetica, sans-serif" font-weight="700">INSTALLATION & DELIVERY</text>
+</svg>
