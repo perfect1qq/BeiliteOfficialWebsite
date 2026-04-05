@@ -82,7 +82,7 @@ export default function Header() {
     setMobileMenuOpen(false)
   }, [pathname])
 
-  const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
+  const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
 
   return (
     <header className="site-header">
