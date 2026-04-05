@@ -1,26 +1,30 @@
 {
-  "name": "wuhan-beilite-official-clone",
+  "name": "beilit-price-list",
+  "version": "0.0.0",
   "private": true,
-  "version": "1.0.0",  
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.20.0",
-    "i18next": "^23.7.0",
-    "react-i18next": "^13.5.0",
-    "react-helmet-async": "^2.0.4"
+    "@element-plus/icons-vue": "^2.3.2",
+    "axios": "^1.13.6",
+    "element-plus": "^2.13.6",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.30",
+    "vue-router": "^5.0.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "gh-pages": "^6.1.1",
-    "vite": "^5.4.10"
+    "@vitejs/plugin-vue": "^6.0.4",
+    "@vitejs/plugin-vue-jsx": "^5.1.4",
+    "prettier": "3.8.1",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.7"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
   }
 }
