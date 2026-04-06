@@ -1,6 +1,6 @@
 # Wuhan Beilite Official Clone
 
-React + Vite + i18n rebuild of the BLT corporate website style.
+React + Vite rebuild of the BLT corporate website style.
 
 ## Run
 
@@ -15,9 +15,7 @@ npm run dev
 npm run build
 ```
 
-The project uses no Tailwind. All styles are in `src/styles/global.css`, with bilingual content in `src/locales`.
+## Notes
 
-
-## 留言接口
-
-留言表单默认会向 `VITE_LEAD_API_URL` 发送 `POST` 请求。未配置时，会先暂存到本地，便于你后续接入后台通知接口。
+The frontend submits contact and message forms to `POST /api/messages/submit`.
+In local development, Vite proxies `/api` to `http://localhost:3000`.

@@ -1,66 +1,13 @@
 import { useState, useCallback, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logoPng from '../assets/logo.png'
+import { BLT_LOGO } from '../data/bltvipHomeData'
+import { bltFallback } from '../utils/bltvipAsset'
+import { NAV_ITEMS, MEGA_MENU, MEGA_VISIBLE_LINKS } from '../data/navConfig'
 import { useTranslation } from 'react-i18next'
 
-/* ------------------------------------------------------------------ */
-/*  导航菜单配置 — 严格对标 bltvip.com 原站结构                          */
-/* ------------------------------------------------------------------ */
-
-/** 主导航列表 */
-const NAV_ITEMS = [
-  { key: 'nav_home',     path: '/' },
-  { key: 'nav_about',    path: '/about',    hasMega: true },
-  { key: 'nav_news',     path: '/news',     hasMega: true },
-  { key: 'nav_products', path: '/products', hasMega: true },
-  { key: 'nav_tech',     path: '/services' },
-  { key: 'nav_cases',    path: '/cases',    hasMega: true },
-  { key: 'nav_brochure', path: '/brochure' },
-  { key: 'nav_contact',  path: '/contact' },
-]
-
-/** 下拉菜单详情 — 1:1 对应原站下拉内容 */
-const MEGA_MENU = {
-  nav_about: {
-    titleKey: 'nav_about',
-    links: [
-      { nameKey: 'cat_intro',      path: '/about' },
-      { nameKey: 'cat_culture',    path: '/about/culture' },
-      { nameKey: 'cat_philosophy', path: '/about/philosophy' },
-      { nameKey: 'cat_structure',  path: '/about/structure' },
-      { nameKey: 'cat_honor',      path: '/about/honor' },
-    ],
-  },
-  nav_news: {
-    titleKey: 'nav_news',
-    links: [
-      { nameKey: 'cat_report',     path: '/news' },
-      { nameKey: 'cat_video',      path: '/news/video' },
-    ],
-  },
-  nav_products: {
-    titleKey: 'nav_products',
-    links: [
-      { nameKey: 'pro_stereo',     path: '/products/stereo' },
-      { nameKey: 'cat_racking',    path: '/products' },
-      { nameKey: 'cat_accessory',  path: '/products/accessory' },
-    ],
-  },
-  nav_cases: {
-    titleKey: 'nav_cases',
-    links: [
-      { nameKey: 'cat_factory',    path: '/cases/factory' },
-      { nameKey: 'cat_clients',    path: '/cases' },
-    ],
-  },
-}
-
-/* ------------------------------------------------------------------ */
-/*  组件                                                               */
-/* ------------------------------------------------------------------ */
-
 /**
- * 全站顶部导航栏
+ * 顶栏对标 bltvip：Logo 靠左、导航左展；Mega 仅单列 3～5 条，无配图
  */
 export default function Header() {
   const { t, i18n } = useTranslation()
@@ -68,42 +15,48 @@ export default function Header() {
   const [activeKey, setActiveKey] = useState(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  /** 切换中英文 */
   const toggleLang = useCallback(() => {
     const nextLang = i18n.language === 'zh' ? 'en' : 'zh'
     i18n.changeLanguage(nextLang)
   }, [i18n])
 
-  /** 判断导航项是否高亮 */
-  const isActive = (path) =>
-    path === '/' ? pathname === '/' : pathname.startsWith(path)
+  const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path))
 
-  /** 路由变化时自动收起移动端菜单 */
   useEffect(() => {
     setMobileMenuOpen(false)
   }, [pathname])
 
+  const megaLinksFor = useCallback((key) => {
+    const mega = MEGA_MENU[key]
+    if (!mega?.links) return []
+    return mega.links.slice(0, MEGA_VISIBLE_LINKS)
+  }, [])
+
   return (
-    <header className="site-header">
+    <header className="site-header site-header--blt">
       <div className="header-container">
         <div className="header-inner">
           <div className="header-mobile-top">
-            {/* Logo 区 */}
             <div className="brand-logo">
               <Link to="/">
                 <img
-                  src={logoPng}
+                  src={BLT_LOGO}
                   alt={t('nav_home')}
                   className="logo-img"
                   onError={(e) => {
-                    e.currentTarget.src = `${import.meta.env.BASE_URL}assets/favicon.svg`
+                    const el = e.currentTarget
+                    if (el.dataset.logoFallback === '1') {
+                      el.src = logoPng
+                      return
+                    }
+                    el.dataset.logoFallback = '1'
+                    el.src = bltFallback('upload/image/201803/23/1155594161.png')
                   }}
                 />
               </Link>
             </div>
 
             <div className="header-mobile-actions">
-              {/* 右侧电话 + 语言切换 */}
               <div className="header-right">
                 <div className="tel">
                   <span className="tel-icon">☎</span>
@@ -130,10 +83,10 @@ export default function Header() {
             </div>
           </div>
 
-          {/* 主导航 */}
-          <nav className="desktop-nav">
+          <nav className="desktop-nav desktop-nav--blt">
             {NAV_ITEMS.map(({ key, path, hasMega }) => {
               const mega = MEGA_MENU[key]
+              const preview = megaLinksFor(key)
               return (
                 <div
                   key={key}
@@ -149,28 +102,21 @@ export default function Header() {
                     {t(key)}
                   </Link>
 
-                  {/* MegaMenu 白色大面板下拉 */}
-                  {hasMega && mega && activeKey === key && (
-                    <div className="subboxbg">
-                      <div className="mega-left">
-                        {mega.links.map((link) => (
-                          <Link
-                            key={link.path}
-                            to={link.path}
-                            className="mega-link"
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            {t(link.nameKey)}
-                            <span className="mega-arrow">›</span>
-                          </Link>
+                  {hasMega && mega && activeKey === key && preview.length > 0 && (
+                    <div className="mega-dropdown mega-dropdown--simple" role="navigation" aria-label={t(mega.panelTitleKey)}>
+                      <ul className="mega-dropdown__links mega-dropdown__links--only">
+                        {preview.map((link) => (
+                          <li key={link.path}>
+                            <Link
+                              to={link.path}
+                              className="mega-dropdown__link"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {t(link.nameKey)}
+                            </Link>
+                          </li>
                         ))}
-                      </div>
-                      <div className="mega-right">
-                        <div className="mega-contact-img">
-                          <span>{t('nav_contact')}</span>
-                          <small>contact us</small>
-                        </div>
-                      </div>
+                      </ul>
                     </div>
                   )}
                 </div>
@@ -178,7 +124,6 @@ export default function Header() {
             })}
           </nav>
 
-          {/* 移动端菜单面板 */}
           {mobileMenuOpen && (
             <div className="mobile-nav-panel">
               {NAV_ITEMS.map(({ key, path, hasMega }) => {

@@ -1,20 +1,10 @@
 import { useTranslation } from 'react-i18next'
+import { BLT_FOOTER_TEL } from '../data/bltvipHomeData'
+import { bltFallback } from '../utils/bltvipAsset'
 
 /**
- * 页脚 — 1:1 还原 bltvip.com
+ * 页脚 — 精简为版权信息 + 联系电话
  */
-
-const FRIEND_LINKS = [
-  { nameKey: '仓库管理', url: '#' },
-  { nameKey: '武汉货架', url: '#' },
-  { nameKey: '重型货架', url: '#' },
-  { nameKey: '163邮箱',  url: 'http://mail.163.com' },
-  { nameKey: '立库货架', url: '#' },
-  { nameKey: '百度',     url: 'http://baidu.com' },
-  { nameKey: '自动化设备', url: '#' },
-  { nameKey: '曲面贴合机', url: '#' },
-  { nameKey: '集装袋',   url: '#' },
-]
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -22,19 +12,6 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        {/* 友情链接 */}
-        <div className="footer-top">
-          <span className="footer-label">{t('footer_links')} :</span>
-          <ul className="footer-links">
-            {FRIEND_LINKS.map((link) => (
-              <li key={link.nameKey}>
-                <a href={link.url} target="_blank" rel="noreferrer">{link.nameKey}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* 版权 + 电话 */}
         <div className="footer-bottom">
           <div className="footer-copy">
             {t('footer_copy')}&nbsp;&nbsp;&nbsp;
@@ -44,7 +21,17 @@ export default function Footer() {
             &nbsp;&nbsp;{t('footer_tech')}
           </div>
           <div className="footer-phone">
-            ☎ 027-69340899/15171431996
+            <img
+              src={BLT_FOOTER_TEL}
+              alt=""
+              className="footer-tel-ico"
+              width={20}
+              height={20}
+              onError={(e) => {
+                e.currentTarget.src = bltFallback('images/tel2.png')
+              }}
+            />
+            027-69340899/15171431996
           </div>
         </div>
       </div>

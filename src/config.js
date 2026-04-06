@@ -1,8 +1,7 @@
 /**
  * 后端 API 基础地址
- * 
- * 动态读取环境变量：
- * - 开发环境：读取 .env (localhost:3000)
- * - 生产环境：读取 .env.production (server-ls6e.onrender.com)
+ *
+ * 默认使用相对路径 /api/messages/submit，配合 Vite 代理或同域反向代理。
+ * 如需直连独立后端，可在环境变量中设置 VITE_API_BASE_URL。
  */
-export const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+export const API_BASE = import.meta.env.VITE_API_BASE_URL || ''

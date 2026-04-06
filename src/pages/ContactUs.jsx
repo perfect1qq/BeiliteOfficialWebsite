@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { submitMessage } from '../services/messageApi'
+import { BLT_WECHAT_QR } from '../data/bltvipHomeData'
+import { bltFallback } from '../utils/bltvipAsset'
 
 /**
  * 联系我们页面 — 支持多语言
@@ -50,7 +52,16 @@ export default function ContactUs() {
           </div>
           <div className="conRig">
             <div className="conWx">
-              <div className="qr-placeholder">QR Code</div>
+              <img
+                className="con-qr-img"
+                src={BLT_WECHAT_QR}
+                alt="微信公众号"
+                width={135}
+                height={135}
+                onError={(e) => {
+                  e.currentTarget.src = bltFallback('upload/image/erweima/2353273286.png')
+                }}
+              />
             </div>
             <div className="conRigCon">
               <p>{t('con_scan')}</p>

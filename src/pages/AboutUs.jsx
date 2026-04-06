@@ -1,27 +1,49 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
+import { bltFallback } from '../utils/bltvipAsset'
+import {
+  ABOUT_PROFILE_INLINE,
+  ABOUT_CULTURE_IMAGES,
+  ABOUT_STRUCTURE_IMAGE,
+  ABOUT_HONOR_IMAGES,
+} from '../data/aboutPageAssets'
+import { SITE_ORIGIN } from '../config/site'
 
 /**
- * 关于我们 — 全局多语言适配版
+ * 关于我们 — 文案 i18n，配图与官网 aboutus / onepage 同源
  */
 export default function AboutUs() {
-  const { pathname } = useLocation();
-  const { t } = useTranslation();
+  const { pathname } = useLocation()
+  const { t, i18n } = useTranslation()
+  const isEn = i18n.language === 'en'
 
   const renderContent = () => {
     if (pathname.includes('culture')) {
       return (
         <>
           <h3 className="page-title">{t('about_culture_title')}</h3>
-          <p><strong>{t('about_culture_vision')}</strong></p>
+          <p>
+            <strong>{t('about_culture_vision')}</strong>
+          </p>
           <p>{t('about_culture_purpose')}</p>
           <p>{t('about_culture_strategy')}</p>
-          <img className="page-image" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800" alt="Culture" />
+          {ABOUT_CULTURE_IMAGES.map(({ rel, image }) => (
+            <img
+              key={rel}
+              className="page-image"
+              src={image}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              onError={(e) => {
+                e.currentTarget.src = bltFallback(rel)
+              }}
+            />
+          ))}
         </>
-      );
-    } 
+      )
+    }
     if (pathname.includes('philosophy')) {
       return (
         <>
@@ -29,46 +51,87 @@ export default function AboutUs() {
           <p>{t('about_philosophy_p1')}</p>
           <p style={{ marginTop: '20px' }}>{t('about_philosophy_p2')}</p>
         </>
-      );
+      )
     }
     if (pathname.includes('structure')) {
       return (
         <>
           <h3 className="page-title">{t('about_structure_title')}</h3>
           <p>{t('about_structure_p1')}</p>
-          <img className="page-image" src="https://images.unsplash.com/photo-1587293852726-70cdb56c2836?auto=format&fit=crop&w=800" alt="Structure" />
+          <img
+            className="page-image"
+            src={ABOUT_STRUCTURE_IMAGE.image}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            onError={(e) => {
+              e.currentTarget.src = bltFallback(ABOUT_STRUCTURE_IMAGE.rel)
+            }}
+          />
         </>
-      );
+      )
     }
     if (pathname.includes('honor')) {
       return (
         <>
           <h3 className="page-title">{t('about_honor_title')}</h3>
           <p>{t('about_honor_p1')}</p>
-          <div className="about-gallery">
-            <img className="page-image" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400" alt="Honor 1" />
-            <img className="page-image" src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&w=400" alt="Honor 2" />
+          <div className="about-gallery about-gallery--honor">
+            {ABOUT_HONOR_IMAGES.map(({ rel, image }) => (
+              <img
+                key={rel}
+                className="page-image"
+                src={image}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  e.currentTarget.src = bltFallback(rel)
+                }}
+              />
+            ))}
           </div>
         </>
-      );
+      )
     }
-    // Default: Profile
     return (
       <>
         <h3 className="page-title">{t('about_profile_title')}</h3>
         <p>{t('home_about_intro_p1')}</p>
         <p style={{ marginTop: '10px' }}>{t('home_about_intro_p2')}</p>
-        <img className="page-image" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" alt="Profile" />
+        <img
+          className="page-image"
+          src={ABOUT_PROFILE_INLINE.image}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            e.currentTarget.src = bltFallback(ABOUT_PROFILE_INLINE.rel)
+          }}
+        />
       </>
-    );
-  };
+    )
+  }
+
+  const pageTitle = isEn ? `${t('nav_about')} | Wuhan Beilite Racking` : `${t('nav_about')} | 武汉倍力特货架`
+  const desc = isEn
+    ? 'Wuhan Beilite — warehouse racking manufacturer, company profile and credentials.'
+    : '武汉倍力特物流装备有限公司，仓储货架生产厂家，公司简介与资质荣誉。'
 
   return (
     <div className="about-content">
       <Helmet>
-        <title>{t('nav_about')}_武汉倍力特货架官方网站</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={desc} />
+        <link rel="canonical" href={`${SITE_ORIGIN}${pathname}`} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={desc} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_ORIGIN}${pathname}`} />
+        <meta property="og:locale" content={isEn ? 'en_US' : 'zh_CN'} />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       {renderContent()}
     </div>
-  );
+  )
 }

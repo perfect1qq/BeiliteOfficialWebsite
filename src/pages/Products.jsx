@@ -1,54 +1,110 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { BLT_HOME_PRODUCTS } from '../data/bltvipHomeData'
+import { PRODUCT_SITE_DETAIL_BY_PATH } from '../data/productSiteDetail'
+import { blt, bltFallback } from '../utils/bltvipAsset'
+import ProductDetailInline from '../components/ProductDetailInline'
+
+const ACCESSORY_ROW = {
+  cat: '/products/accessory',
+  nameKey: 'pro_accessory',
+  descKey: 'pro_accessory_desc',
+  image: blt('upload/image/201802/27/0913152158.jpg'),
+  remotePath: 'upload/image/201802/27/0913152158.jpg',
+}
+
+const allProductsDatabase = [
+  ...BLT_HOME_PRODUCTS.map((p) => ({
+    cat: p.path,
+    nameKey: p.nameKey,
+    descKey: p.descKey,
+    image: p.image,
+    remotePath: p.remotePath,
+  })),
+  ACCESSORY_ROW,
+]
+
+function norm(p) {
+  return (p || '').replace(/\/$/, '') || '/'
+}
 
 /**
- * 产品中心 — 支持多语言分类与内容
+ * 产品中心：列表为官网风格叠层卡片；单品路由直接展示详情（无需再点 proinfo）
  */
-const allProductsDatabase = [
-  { cat: '/products/stereo',    nameKey: 'pro_stereo',      descKey: 'pro_stereo_desc',     image: 'https://images.unsplash.com/photo-1565891741441-64926e441838?q=80&w=600' },
-  { cat: '/products/heavy',     nameKey: 'pro_heavy',       descKey: 'pro_heavy_desc',      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600' },
-  { cat: '/products/panel',     nameKey: 'pro_panel',       descKey: 'pro_panel_desc',      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600' },
-  { cat: '/products/attic',     nameKey: 'pro_attic',       descKey: 'pro_attic_desc',      image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=600' },
-  { cat: '/products/through',   nameKey: 'pro_through',     descKey: 'pro_through_desc',    image: 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=600' },
-  { cat: '/products/cantilever',nameKey: 'pro_cantilever',  descKey: 'pro_cantilever_desc', image: 'https://images.unsplash.com/photo-1605280263929-1c42c62ef169?q=80&w=600' },
-  { cat: '/products/narrow',    nameKey: 'pro_narrow',      descKey: 'pro_narrow_desc',     image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2836?q=80&w=600' },
-  { cat: '/products/shuttle',   nameKey: 'pro_shuttle',     descKey: 'pro_shuttle_desc',    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600' },
-  { cat: '/products/platform',  nameKey: 'pro_platform',    descKey: 'pro_platform_desc',   image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=600' },
-  { cat: '/products/medium',    nameKey: 'pro_medium',      descKey: 'pro_medium_desc',     image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600' },
-  { cat: '/products/drawer',    nameKey: 'pro_drawer',      descKey: 'pro_drawer_desc',     image: 'https://images.unsplash.com/photo-1565891741441-64926e441838?q=80&w=600' },
-  { cat: '/products/fluent',    nameKey: 'pro_fluent',      descKey: 'pro_fluent_desc',     image: 'https://images.unsplash.com/photo-1605280263929-1c42c62ef169?q=80&w=600' },
-  { cat: '/products/accessory', nameKey: 'pro_accessory',   descKey: 'pro_accessory_desc',  image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2836?q=80&w=600' },
-];
-
 export default function Products() {
-  const location = useLocation();
-  const { t } = useTranslation();
-  
-  const filteredProducts = location.pathname === '/products' || location.pathname === '/products/'
-    ? allProductsDatabase.filter(p => p.cat !== '/products/accessory') // 不显示辅助设备
-    : allProductsDatabase.filter(p => p.cat === location.pathname);
+  const location = useLocation()
+  const { t } = useTranslation()
+  const p = norm(location.pathname)
+
+  const isList = p === '/products'
+  const siteDetail = PRODUCT_SITE_DETAIL_BY_PATH[p]
+  const rowHome = BLT_HOME_PRODUCTS.find((x) => norm(x.path) === p)
+
+  if (!isList && siteDetail && rowHome) {
+    return (
+      <>
+        <Helmet>
+          <title>
+            {t(rowHome.nameKey)}_{t('nav_products')}_倍力特货架
+          </title>
+        </Helmet>
+        <ProductDetailInline productPath={p} />
+      </>
+    )
+  }
+
+  const filteredProducts =
+    p === '/products'
+      ? allProductsDatabase
+      : allProductsDatabase.filter((x) => norm(x.cat) === p)
+
+  const single = filteredProducts.length === 1 ? filteredProducts[0] : null
 
   return (
     <>
       <Helmet>
         <title>{t('nav_products')}_倍力特货架</title>
       </Helmet>
-      
-      <div className="proList">
-        {filteredProducts.map((pro, idx) => (
-          <div key={idx} className="proItem">
-            <div className="proImg">
-               <img src={pro.image} alt={t(pro.nameKey)} loading="lazy" decoding="async" />
-               <div className="proTit">
-                 <strong>{t(pro.nameKey)}</strong>
-                 <p>{t(pro.descKey)}</p>
-               </div>
-            </div>
-          </div>
-        ))}
-      </div>
+
+      <ul className="proList proList--grid">
+        {filteredProducts.map((pro) => {
+          const hasDetail = Boolean(PRODUCT_SITE_DETAIL_BY_PATH[norm(pro.cat)])
+          return (
+            <li key={pro.cat} className="proItem proItem--card">
+              <Link to={pro.cat} className="proCard__link">
+                <div className="proCard">
+                  <div className="proCard__media">
+                    <img
+                      className="proCard__img"
+                      src={pro.image}
+                      alt={t(pro.nameKey)}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        e.currentTarget.src = bltFallback(pro.remotePath)
+                      }}
+                    />
+                    <div className="proCard__overlay">
+                      <h3 className="proCard__name">{t(pro.nameKey)}</h3>
+                      <p className="proCard__desc">{t(pro.descKey)}</p>
+                      {hasDetail && <span className="proCard__more">{t('pro_detail_link')}</span>}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+
+      {single && !PRODUCT_SITE_DETAIL_BY_PATH[p] && (
+        <div className="pro-detail-extra oneText">
+          <h4 className="pro-detail-extra-title">{t('pro_detail_title')}</h4>
+          <p>{t('pro_detail_body')}</p>
+        </div>
+      )}
     </>
-  );
+  )
 }

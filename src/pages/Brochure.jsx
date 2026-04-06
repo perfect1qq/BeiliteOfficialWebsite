@@ -1,17 +1,14 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { BROCHURE_PAGES } from '../data/brochurePages'
+import { bltFallback } from '../utils/bltvipAsset'
 
 /**
- * 电子宣传册 — 支持多语言
+ * 电子宣传册 — 与官网 piclist/23 分页入口一致
  */
-const brochureData = [
-  { nameKey: 'brochure_1_title', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80' },
-  { nameKey: 'brochure_2_title', image: 'https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&w=400&q=80' }
-];
-
 export default function Brochure() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <>
@@ -20,18 +17,26 @@ export default function Brochure() {
       </Helmet>
 
       <ul className="book">
-        {brochureData.map((item, idx) => (
-          <li key={idx}>
-            <a href="#" className="book-link">
+        {BROCHURE_PAGES.map((page) => (
+          <li key={page.id}>
+            <Link to={`/brochure/page/${page.id}`} className="book-link">
               <div className="bookImg">
-                 <img src={item.image} alt={t(item.nameKey)} loading="lazy" decoding="async" />
-                 <i></i>
+                <img
+                  src={page.image}
+                  alt={t(page.titleKey)}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    e.currentTarget.src = bltFallback(page.remotePath)
+                  }}
+                />
+                <i />
               </div>
-              <div className="bookTit">{t(item.nameKey)}</div>
-            </a>
+              <div className="bookTit">{t(page.titleKey)}</div>
+            </Link>
           </li>
         ))}
       </ul>
     </>
-  );
+  )
 }

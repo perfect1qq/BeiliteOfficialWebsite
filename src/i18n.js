@@ -17,7 +17,6 @@ const resources = {
       "nav_cases": "工程案例",
       "nav_brochure": "电子宣传册",
       "nav_contact": "联系我们",
-      "footer_links": "友情链接",
       "footer_copy": "版权所有：武汉倍力特物流装备有限公司",
       "footer_tech": "网站技术支持：千助科技",
       "bread_pos": "您的当前位置：",
@@ -120,6 +119,20 @@ const resources = {
       "news_2_desc": "近日，2024智造物流高峰论坛在武汉正式开幕。倍力特总工程师在会上分享了专题报告...",
       "news_video_1_title": "倍力特工厂自动化生产线实录视频",
       "news_video_1_desc": "点击观看倍力特生产工厂的一线操作流程，见证高精度货架的诞生过程。",
+      "news_video_1_body": "本视频展示武汉倍力特物流装备有限公司蔡甸生产基地的型材轧制、焊接与喷塑等环节。我们采用数控冷弯成型与静电粉末喷涂工艺，保障货架承载与涂层耐久。如需实地参观或技术交流，欢迎通过网站留言或电话联系。",
+
+      "news_article_1_title": "智能高效电商分拣系统助推其快速发展",
+      "news_article_1_desc": "最近几年，国内电商呈井喷式发展，电商的这样发展，也促使国内消费流突飞猛进增长，同时也带动巨大的物流模式变革。而且客户对物流的效率产生了极高的要求。更为重要的是，..",
+      "news_article_1_body": "随着电商订单碎片化、SKU 激增，传统平面仓已难以满足高频分拣与准确率要求。倍力特针对电商物流中心推出高密度存储与柔性拣选相结合的货架体系，包括窄巷道货架、流利式拣选区与钢结构平台组合方案。\n\n我们在湖北及周边地区多个项目中验证了“立体存储 + 波次拣选”的落地效果：同等面积下库容显著提升，补货动线更短，差错率下降。若您正在规划新建或改造电商仓，可预约工程师上门测量与方案论证。",
+
+      "news_article_2_title": "电商与物流互促试点政策将推向全国",
+      "news_article_2_desc": "日前从商务部获悉，电子商务与物流快递协同发展试点3年来已经形成一批可复制推广的经验，下一步，将在进一步总结提炼好的经验、作法的基础之上，出台相关政策文件，并向全国..",
+      "news_article_2_body": "政策层面持续推动电商与快递协同，为仓储装备企业带来标准化、绿色化、智能化的新要求。倍力特在产品设计中注重可拆装结构、环保粉末涂料与可扩展单元，便于客户随业务增长分期扩容。\n\n公司技术服务团队可配合您解读当地产业政策与园区规范，在方案阶段预留消防通道、荷载与地坪承载等关键边界条件，减少后期整改成本。",
+
+      "news_article_3_title": "智能仓储与精益管理融合趋势观察",
+      "news_article_3_desc": "在制造业与流通企业降本增效压力下，货架系统正从“单纯存放”走向与 WMS、自动化设备深度协同。倍力特持续投入结构优化与安装标准化..",
+      "news_article_3_body": "精益管理强调节拍、可视与少浪费；货架作为库内基础设施，其布局直接影响拣货路径与盘点效率。我们建议在大中型配送中心优先梳理 ABC 分类与动线，再匹配横梁式、阁楼或穿梭式等形态。\n\n倍力特提供从测量、设计、制造到安装售后的全流程服务，典型案例覆盖食品、医药、汽配、电商等行业。欢迎索取与您行业相近的参考方案。",
+
       "date_prefix": "发布时间：",
       "btn_detail": "查看详情",
 
@@ -128,6 +141,25 @@ const resources = {
       "case_factory_2_title": "高精度数控冷弯成型线",
       "case_1_title": "中国联通仓储自动化项目",
       "case_2_title": "顺丰速运中转中心货架",
+
+      "pro_detail_title": "产品说明",
+      "pro_detail_body": "以上为该品类常规说明，具体承载、层数、表面处理与配件可按现场测量与荷载要求定制。欢迎留下库房尺寸与货物规格，由工程师为您出图报价。",
+      "pro_detail_link": "图文详情（多图）",
+      "pro_back_list": "返回产品列表",
+
+      "broch_cover": "封皮",
+      "broch_p1": "第1页",
+      "broch_p2": "第2页",
+      "broch_p3": "第3页",
+      "broch_p4": "第4页",
+      "broch_p5": "第5页",
+      "broch_p6": "第6页",
+      "broch_p7": "第7页",
+      "broch_back_list": "返回宣传册目录",
+
+      "news_video_36_title": "如何排除现场环境对EAS电子商品防盗天线的干扰",
+      "news_video_36_desc": "现场视频讲解，帮助您了解安装与干扰排查要点。",
+      "news_video_36_body": "本视频演示相关设备在现场环境下的典型干扰因素与处理思路。若您的项目涉及仓储安防与天线布置，可联系倍力特技术部获取货架与弱电配合方面的建议。",
 
       // --- 联系我们 详情 ---
       "con_address_label": "地 址：",
@@ -166,7 +198,6 @@ const resources = {
       "nav_cases": "Cases",
       "nav_brochure": "Brochure",
       "nav_contact": "Contact",
-      "footer_links": "Friend Links",
       "footer_copy": "Copyright: Wuhan Beilite Logistics Equipment Co., Ltd.",
       "footer_tech": "Tech Support: 1000zhu.com",
       "bread_pos": "Current Position: ",
@@ -269,6 +300,20 @@ const resources = {
       "news_2_desc": "The 2024 Smart Logistics Forum opened in Wuhan. Beilite shared report on AS/RS applications...",
       "news_video_1_title": "Beilite Factory Automated Production Line Video",
       "news_video_1_desc": "Watch the on-site operation of Beilite factory and witness the birth of high-precision racking.",
+      "news_video_1_body": "This video shows roll forming, welding, and powder coating at our Caidian plant. We use CNC roll forming and electrostatic powder coating to ensure load capacity and finish durability. Contact us for a factory visit.",
+
+      "news_article_1_title": "Smart Sorting Systems Boost E-commerce Growth",
+      "news_article_1_desc": "Domestic e-commerce has grown rapidly, driving huge changes in logistics. Customers demand higher efficiency than ever...",
+      "news_article_1_body": "Fragmented orders and more SKUs make traditional flat warehouses insufficient. Beilite provides high-density storage plus flexible picking, including narrow-aisle racking, carton flow areas, and mezzanine combinations.\n\nProjects in Hubei and nearby regions show higher capacity in the same footprint, shorter replenishment paths, and fewer errors. Ask our engineers for a site survey.",
+
+      "news_article_2_title": "E-commerce & Logistics Pilot Policies to Expand Nationwide",
+      "news_article_2_desc": "The Ministry of Commerce reports that three years of coordinated e-commerce and express pilots have produced replicable experience...",
+      "news_article_2_body": "Policies push greener, smarter warehousing. Beilite designs demountable structures, eco-friendly powder coating, and scalable bays for phased expansion.\n\nOur team can align layouts with local regulations and fire access early in design to avoid costly changes later.",
+
+      "news_article_3_title": "Smart Warehousing and Lean Operations",
+      "news_article_3_desc": "Under cost pressure, racking is evolving from simple storage toward deeper integration with WMS and automation...",
+      "news_article_3_body": "Lean operations need clear flow and visibility; layout drives pick paths and cycle counts. We suggest ABC analysis and flow design before choosing beam, mezzanine, or shuttle systems.\n\nBeilite offers survey, design, manufacturing, installation, and after-sales across food, pharma, auto parts, e-commerce, and more.",
+
       "date_prefix": "Release Date: ",
       "btn_detail": "View Details",
 
@@ -277,6 +322,25 @@ const resources = {
       "case_factory_2_title": "High-precision Roll Forming Line",
       "case_1_title": "China Unicom AS/RS Project",
       "case_2_title": "SF Express Hub Racking Project",
+
+      "pro_detail_title": "Product notes",
+      "pro_detail_body": "Specifications above are typical; capacity, levels, finish, and accessories can be customized after site survey and load analysis. Leave your warehouse dimensions and pallet specs for a drawing and quote.",
+      "pro_detail_link": "Details (gallery)",
+      "pro_back_list": "Back to product list",
+
+      "broch_cover": "Cover",
+      "broch_p1": "Page 1",
+      "broch_p2": "Page 2",
+      "broch_p3": "Page 3",
+      "broch_p4": "Page 4",
+      "broch_p5": "Page 5",
+      "broch_p6": "Page 6",
+      "broch_p7": "Page 7",
+      "broch_back_list": "Back to brochure index",
+
+      "news_video_36_title": "Reducing environmental interference for EAS antennas",
+      "news_video_36_desc": "Short on-site video on installation and interference checks.",
+      "news_video_36_body": "This video explains typical interference factors and mitigation ideas. For warehouse security and antenna layout with racking projects, contact Beilite technical support.",
 
       // --- Contact Us Details ---
       "con_address_label": "Address: ",

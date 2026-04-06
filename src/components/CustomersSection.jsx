@@ -1,36 +1,59 @@
+import { useState, useCallback, useMemo, useEffect } from 'react'
+import { BLT_PARTNERS } from '../data/bltvipHomeData'
+import CustomerLogos from './CustomerLogos'
+
+const PAGE_SIZE = 10
+
 /**
- * 首页 — 合作客户板块
- *
- * 原站展示 30+ 个品牌客户 Logo，横向滚动，
- * 此处用网格布局展示核心客户名单。
+ * 合作客户 — 自动轮播 + 左右切换
  */
-const PARTNERS = [
-  '中国联通', '国美电器', '森马', '福田汽车', '大唐国际',
-  '突破电气', '中国农业银行', '绫致时装', '京东', '庆华集团',
-  '百世汇通', '包钢集团', '北京奔驰', '碧桂园', '宾堡',
-  '当当网', '东风汽车', '国家电网', '康明斯', '乐视汽车',
-  '乐友', '李宁', '力帆时骏', '拼多多', '三丰智能',
-  '森马服饰', '施耐德电器', '顺丰速运', '同仁堂', '万达集团',
-  '雪花啤酒', '中粮集团',
-]
-
 export default function CustomersSection() {
-  return (
-    <div className="box3Bg">
-      <div className="container">
-        <div className="boxTith2" style={{ textAlign: 'center', marginBottom: '40px' }}>
-          合作客户 <span className="boxTitEn" style={{ display: 'block', marginTop: '5px' }}>
-            Cooperative customers
-          </span>
-        </div>
+  const [page, setPage] = useState(0)
+  const pageCount = Math.max(1, Math.ceil(BLT_PARTNERS.length / PAGE_SIZE))
 
-        <ul className="box3Item">
-          {PARTNERS.map((name) => (
-            <li key={name}>
-              <div className="box3Name">{name}</div>
-            </li>
-          ))}
-        </ul>
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setPage((p) => (p + 1) % pageCount)
+    }, 3500)
+
+    return () => window.clearInterval(timer)
+  }, [pageCount])
+
+  const slice = useMemo(() => {
+    const start = page * PAGE_SIZE
+    return BLT_PARTNERS.slice(start, start + PAGE_SIZE)
+  }, [page])
+
+  const prev = useCallback(() => {
+    setPage((p) => (p - 1 + pageCount) % pageCount)
+  }, [pageCount])
+
+  const next = useCallback(() => {
+    setPage((p) => (p + 1) % pageCount)
+  }, [pageCount])
+
+  const logos = useMemo(
+    () =>
+      slice.map((item) => ({
+        name: item.name,
+        url: item.image,
+        remotePath: item.remotePath,
+      })),
+    [slice],
+  )
+
+  return (
+    <div className="box3Bg customers-section">
+      <div className="container">
+        <div className="home-partners-wrap customers-section__wrap">
+          <button type="button" className="home-partners-arrow home-partners-arrow--prev" onClick={prev} aria-label="上一页客户" />
+
+          <div className="customers-section__center">
+            <CustomerLogos logos={logos} />
+          </div>
+
+          <button type="button" className="home-partners-arrow home-partners-arrow--next" onClick={next} aria-label="下一页客户" />
+        </div>
       </div>
     </div>
   )

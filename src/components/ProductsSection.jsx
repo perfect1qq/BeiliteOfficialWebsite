@@ -1,54 +1,66 @@
+import { useState, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { BLT_HOME_PRODUCTS, BLT_ICONS } from '../data/bltvipHomeData'
+import { bltFallback } from '../utils/bltvipAsset'
+import ProductCard from './ProductCard'
+
+const PAGE_SIZE = 4
 
 /**
- * 首页 — 倍力特产品板块
+ * 首页产品 — 每页 4 个卡片，支持左右翻页
  */
-const productsData = [
-  { nameKey: 'pro_stereo',     descKey: 'pro_stereo_desc',     path: '/products/stereo',    image: 'https://images.unsplash.com/photo-1565891741441-64926e441838?q=80&w=600' },
-  { nameKey: 'pro_heavy',      descKey: 'pro_heavy_desc',      path: '/products/heavy',     image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600' },
-  { nameKey: 'pro_panel',      descKey: 'pro_panel_desc',      path: '/products/panel',     image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600' },
-  { nameKey: 'pro_attic',      descKey: 'pro_attic_desc',      path: '/products/attic',     image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=600' },
-  { nameKey: 'pro_through',    descKey: 'pro_through_desc',    path: '/products/through',   image: 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=600' },
-  { nameKey: 'pro_cantilever', descKey: 'pro_cantilever_desc', path: '/products/cantilever',image: 'https://images.unsplash.com/photo-1605280263929-1c42c62ef169?q=80&w=600' },
-  { nameKey: 'pro_narrow',     descKey: 'pro_narrow_desc',     path: '/products/narrow',    image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2836?q=80&w=600' },
-  { nameKey: 'pro_shuttle',    descKey: 'pro_shuttle_desc',    path: '/products/shuttle',   image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600' },
-  { nameKey: 'pro_platform',   descKey: 'pro_platform_desc',   path: '/products/platform',  image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=600' },
-  { nameKey: 'pro_medium',     descKey: 'pro_medium_desc',     path: '/products/medium',    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600' },
-  { nameKey: 'pro_drawer',     descKey: 'pro_drawer_desc',     path: '/products/drawer',    image: 'https://images.unsplash.com/photo-1565891741441-64926e441838?q=80&w=600' },
-  { nameKey: 'pro_fluent',     descKey: 'pro_fluent_desc',     path: '/products/fluent',    image: 'https://images.unsplash.com/photo-1605280263929-1c42c62ef169?q=80&w=600' },
-]
-
 export default function ProductsSection() {
   const { t } = useTranslation()
+  const [page, setPage] = useState(0)
+  const pageCount = Math.ceil(BLT_HOME_PRODUCTS.length / PAGE_SIZE)
+
+  const slice = useMemo(() => {
+    const start = page * PAGE_SIZE
+    return BLT_HOME_PRODUCTS.slice(start, start + PAGE_SIZE)
+  }, [page])
+
+  const prev = useCallback(() => {
+    setPage((p) => (p - 1 + pageCount) % pageCount)
+  }, [pageCount])
+
+  const next = useCallback(() => {
+    setPage((p) => (p + 1) % pageCount)
+  }, [pageCount])
+
+  const titFb = bltFallback('images/box2TitIco.png')
 
   return (
-    <div className="box4Bg">
+    <div className="box2Bg">
       <div className="container">
-        {/* 板块标题 */}
-        <div className="boxTit2">
-          <div className="boxTitH2">{t('home_products_title')}</div>
-          <p className="boxTitSub">PRODUCTS</p>
+        <div className="home-products-head">
+          <h2 className="boxTith2 home-products-title">
+            <img
+              src={BLT_ICONS.box2Tit}
+              alt=""
+              className="box1-tit-ico"
+              onError={(e) => {
+                e.currentTarget.src = titFb
+              }}
+            />
+            &nbsp;{t('home_products_title')}&nbsp;
+            <span className="boxTitEn" style={{ fontSize: '18px' }}>
+              PRODUCTS
+            </span>
+          </h2>
+          <div className="home-products-nav">
+            <button type="button" className="home-carousel-btn home-carousel-btn--prev" onClick={prev} aria-label="上一组产品" />
+            <Link to="/products" className="home-products-more-link">
+              更多
+            </Link>
+            <button type="button" className="home-carousel-btn home-carousel-btn--next" onClick={next} aria-label="下一组产品" />
+          </div>
         </div>
 
-        {/* 产品网格 */}
-        <ul className="box4List">
-          {productsData.map((item) => (
+        <ul className="home-products-page products-grid">
+          {slice.map((item) => (
             <li key={item.path}>
-              <Link to={item.path}>
-                <div className="box4Img">
-                  <img
-                    src={item.image}
-                    alt={`${t(item.nameKey)} - 仓储货架`}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div className="box4Text">
-                  <div className="box4Tit">{t(item.nameKey)}</div>
-                  <div className="box4Brief">{t(item.descKey)}</div>
-                </div>
-              </Link>
+              <ProductCard title={t(item.nameKey)} imageUrl={item.image} href={item.path} />
             </li>
           ))}
         </ul>

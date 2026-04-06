@@ -1,18 +1,21 @@
 import { useState, useEffect, useCallback } from 'react'
+import { BLT_BANNERS } from '../data/bltvipHomeData'
+import { bltFallback } from '../utils/bltvipAsset'
 
-/** 轮播图片列表 — 后期替换为真实图片路径即可 */
-const SLIDES = [
-  { src: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=2000&q=80', alt: '倍力特仓储货架生产线' },
-  { src: 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=2000&q=80', alt: '大型仓库立体货架方案' },
+const FALLBACK_RELS = [
+  'upload/image/201810/31/0946419831.jpg',
+  'upload/image/201810/31/0946532578.jpg',
+  'upload/image/201810/31/0231310007.jpg',
 ]
 
+const SLIDES = BLT_BANNERS.map((src, i) => ({
+  src,
+  fallback: bltFallback(FALLBACK_RELS[i]),
+  alt: '武汉倍力特物流装备 — 仓储货架与生产线',
+}))
+
 /**
- * 首页 Hero 轮播组件
- *
- * 特性：
- * - 5 秒自动轮播
- * - 页面不可见时暂停定时器（节省资源）
- * - 首屏图片不使用 lazy loading，优化 LCP 指标
+ * 首页横幅轮播（图与 http://www.bltvip.com 一致）
  */
 export default function Hero() {
   const [current, setCurrent] = useState(0)
@@ -23,12 +26,10 @@ export default function Hero() {
 
   useEffect(() => {
     let timer = setInterval(next, 5000)
-
     const onVisibility = () => {
       clearInterval(timer)
       if (!document.hidden) timer = setInterval(next, 5000)
     }
-
     document.addEventListener('visibilitychange', onVisibility)
     return () => {
       clearInterval(timer)
@@ -36,18 +37,31 @@ export default function Hero() {
     }
   }, [next])
 
+  const onImgError = (e, fallback) => {
+    const el = e.currentTarget
+    if (el.src !== fallback) el.src = fallback
+  }
+
   return (
     <div className="banBox">
       {SLIDES.map((slide, idx) => (
         <div key={idx} className={`hero-slide ${idx === current ? 'active' : ''}`}>
-          <img src={slide.src} alt={slide.alt} decoding="async" />
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            decoding="async"
+            onError={(e) => onImgError(e, slide.fallback)}
+          />
         </div>
       ))}
 
-      <button className="banner-arrow banner-prev" onClick={prev}>&#10094;</button>
-      <button className="banner-arrow banner-next" onClick={next}>&#10095;</button>
+      <button type="button" className="banner-arrow banner-prev" onClick={prev} aria-label="上一张">
+        &#10094;
+      </button>
+      <button type="button" className="banner-arrow banner-next" onClick={next} aria-label="下一张">
+        &#10095;
+      </button>
 
-      {/* 底部指示器 */}
       <div className="banBox-hd">
         <ul>
           {SLIDES.map((_, idx) => (
@@ -55,6 +69,10 @@ export default function Hero() {
               key={idx}
               className={idx === current ? 'on' : ''}
               onClick={() => setCurrent(idx)}
+              onKeyDown={(e) => e.key === 'Enter' && setCurrent(idx)}
+              role="button"
+              tabIndex={0}
+              aria-label={`第 ${idx + 1} 张`}
             />
           ))}
         </ul>
